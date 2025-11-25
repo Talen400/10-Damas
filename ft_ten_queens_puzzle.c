@@ -6,7 +6,7 @@
 /*   By: tlavared <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 03:34:23 by tlavared          #+#    #+#             */
-/*   Updated: 2025/11/10 05:37:26 by tlavared         ###   ########.fr       */
+/*   Updated: 2025/11/25 19:00:10 by tlavared         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,41 @@
 
 # define FAIL 1
 # define SUCESS 0
+# define N 10
 
-int 	ft_ten_queens_puzzle(void);
+char	*ft_ten_queens_puzzle(void);
 void	ft_putstr(char *str);
+
+size_t	ft_strlen(char *str)
+{
+	size_t	len;
+
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
+}
 
 void	ft_putstr(char *str)
 {
-	int	n;
+	size_t	len;
 
-	n = -1;
-	while (++n && str[n])
-		write(1, &str[n], 1);
+	if (!str)
+		return ;
+	len = ft_strlen(str);
+	write(1, str, len);
 }
 
-int ft_ten_queens_puzzle(void)
+char	*ft_ten_queens_puzzle(void)
 {
+	int	tab[N][N];
 
+	tab
+	return (NULL);
 }
 
-int	ft_ten_queens_puzzle(void)
+int	main(void)
 {
-	ft_putstr("teste\n");
+	ft_putstr(ft_ten_queens_puzzle());
 	return  (SUCESS)
 }
