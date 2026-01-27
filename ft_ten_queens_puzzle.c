@@ -5,50 +5,82 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlavared <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 03:34:23 by tlavared          #+#    #+#             */
-/*   Updated: 2025/11/25 19:00:10 by tlavared         ###   ########.fr       */
+/*   Created: 2026/01/27 19:08:10 by tlavared          #+#    #+#             */
+/*   Updated: 2026/01/27 19:08:11 by tlavared         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-# define FAIL 1
-# define SUCESS 0
-# define N 10
-
-char	*ft_ten_queens_puzzle(void);
-void	ft_putstr(char *str);
-
-size_t	ft_strlen(char *str)
+void	print_arr(int *arr, int len)
 {
-	size_t	len;
+	int	i;
 
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
+	i = 0;
+	while (i < len)
+	{
+		fprintf(stdout, "%d", arr[i]);
+		if (i < len - 1)
+			fprintf(stdout, " ");
+		i++;
+	}
+	fprintf(stdout, "\n");
 }
 
-void	ft_putstr(char *str)
+int	is_valid(int *arr, int col, int row)
 {
-	size_t	len;
+	int	curr_col;
+	int	curr_row;
 
-	if (!str)
+	curr_col = 0;
+	while (curr_col < col)
+	{
+		curr_row = arr[curr_col];
+		if (curr_row == row)
+			return (0);
+		if (curr_row + curr_col == row + col)
+			return (0);
+		if (curr_row - curr_col == row - col)
+			return (0);
+		curr_col++;
+	}
+	return (1);
+}
+
+void	solve(int *arr, int col, int len)
+{
+	int	row;
+
+	if (col == len)
+	{
+		print_arr(arr, len);
 		return ;
-	len = ft_strlen(str);
-	write(1, str, len);
+	}
+	row = 0;
+	while (row < len)
+	{
+		if (is_valid(arr, col, row))
+		{
+			arr[col] = row;
+			solve(arr, col + 1, len);
+		}
+		row++;
+	}
+	return ;
 }
 
-char	*ft_ten_queens_puzzle(void)
+int	main(int argc, char *argv[])
 {
-	int	tab[N][N];
+	int	len;
+	int	*arr;
 
-	tab
-	return (NULL);
-}
-
-int	main(void)
-{
-	ft_putstr(ft_ten_queens_puzzle());
-	return  (SUCESS)
+	if (argc != 2)
+		return (1);
+	len = atoi(argv[1]);
+	arr = malloc (len * sizeof(int ));
+	solve(arr, 0, len);
+	free(arr);
+	return (0);
 }
